@@ -1,6 +1,13 @@
-from deskwiper import clir
+import sys
+from sclir import sclir
 
 if __name__ == "__main__":
-    pass
-    # object = deskwiper('/Users/reasonable/Desktop', '/Users/reasonable/Desktop/old_desktop/')
-#     object.run()
+
+	try:
+		object = sclir(sys.argv[1])
+	except IndexError:
+		object = sclir(10)
+
+	object.run()
+
+    
