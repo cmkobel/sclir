@@ -13,8 +13,10 @@ class sclir:
 	
 	* blink ord ved linjeskift?
 	* keyboard controls
-		* Gå en sætning tilbage
-		* juster hastighed
+		* venstre: Gå en sætning tilbage
+		* højre: ?
+		* op/ned: juster hastighed
+		* q quit
 	* use curses?
 		* brug farver
 
@@ -50,7 +52,7 @@ class sclir:
 
 		if end == ".": self.multiplier = 2
 		elif end == "!": self.multiplier = 2
-		elif end == "⏎": self.multiplier = 2.2
+		elif end == "⏎": self.multiplier = 3
 		elif end == "?": self.multiplier = 2
 		elif end == ":": self.multiplier = 2
 		elif end == ",": self.multiplier = 1.2
@@ -85,9 +87,19 @@ class sclir:
 
 	def run(self):
 
-
+		# put teksten ind i en liste
 		self.word_list = re.sub("[\s]", " ", self.text).split()
-		self.debug_print(self.word_list)
+		
+		# skriv titlen på teksten ...
+		print("  Text:\t", end="")
+		for i in range (0, 5):
+			print (self.word_list[i], end=" ")
+		print("...")
+
+		# skriv hastigheden
+		print(" Speed:\t", self.wps, "w/s ~", int((len(self.word_list) / self.wps / 60)), "min")
+
+		# initialiser counteren der skal bruges til at holde styr på progressen
 		counter = 0
 
 		print()
@@ -104,7 +116,7 @@ class sclir:
 			self.del_n_lines(5)
 
 			# progress
-			print(int(3*(counter/len(self.word_list))-0.001)+1, "/ 3\n")
+			print("Progr.:\t", int(3*(counter/len(self.word_list))-0.001)+1, "/ 3\n")
 			print("           |")
 			print(self.whitespace(len(word)), word)
 			print("           |")
